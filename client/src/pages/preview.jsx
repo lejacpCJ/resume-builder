@@ -1,6 +1,6 @@
 import React from 'react'
 
-const preview = () => {
+const Preview = () => {
     return (
         <div>
             <h1>Preview Page</h1>
@@ -8,4 +8,4 @@ const preview = () => {
     )
 }
 
-export default preview
+export default Preview
