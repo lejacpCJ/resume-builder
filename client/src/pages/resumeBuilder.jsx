@@ -1,6 +1,6 @@
 import React from 'react'
 
-const resumeBuilder = () => {
+const ResumeBuilder = () => {
     return (
         <div>
             <h1>Resume Builder</h1>
@@ -8,4 +8,4 @@ const resumeBuilder = () => {
     )
 }
 
-export default resumeBuilder
+export default ResumeBuilder
