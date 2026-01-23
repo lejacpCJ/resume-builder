@@ -42,7 +42,10 @@ const Dashboard = () => {
           Welcom, John Doe
         </p>
         <div className="flex gap-4">
-          <button className="w-full bg-white sm:max-w-36 h-48 flex flex-col items-center justify-center rounded-lg gap-2 text-slate-600 border border-dashed border-slate-300 group hover:border-green-500 hover:shadow-lg transition-all duration-300 cursor-center">
+          <button
+            onClick={() => setShowCreateResume(true)}
+            className="w-full bg-white sm:max-w-36 h-48 flex flex-col items-center justify-center rounded-lg gap-2 text-slate-600 border border-dashed border-slate-300 group hover:border-green-500 hover:shadow-lg transition-all duration-300 cursor-center"
+          >
             <PlusIcon className="size-11 transition-all duration-300 p-2.5 bg-gradient-to-br from-green-300 to-green-500 text-white rounded-full" />
             <p className="text-sm group-hover:text-green-600 transition-all duration-300">
               Create Resume
