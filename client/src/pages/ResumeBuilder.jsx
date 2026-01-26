@@ -4,6 +4,7 @@ import { dummyResumeData } from "../assets/assets";
 import {
   ArrowLeftIcon,
   Briefcase,
+  ChevronLeft,
   ChevronRight,
   ChevronRightIcon,
   FileText,
@@ -16,6 +17,7 @@ import PersonalInfoForm from "../components/PersonalInfoForm";
 import ResumePreview from "../components/ResumePreview";
 import TemplateSector from "../components/TemplateSector";
 import ColorPicker from "../components/ColorPicker";
+import ProfessionalSummary from "../components/ProfessionalSummary";
 
 const ResumeBuilder = () => {
   const { resumeId } = useParams();
@@ -143,6 +145,18 @@ const ResumeBuilder = () => {
                     }
                     removeBackground={removeBackground}
                     setRemoveBackground={setRemoveBackground}
+                  />
+                )}
+                {activeSection.id === "summary" && (
+                  <ProfessionalSummary
+                    data={resumeData.professional_summary}
+                    onChange={(data) =>
+                      setResumeData((prev) => ({
+                        ...prev,
+                        professional_summary: data,
+                      }))
+                    }
+                    setResumeData={setResumeData}
                   />
                 )}
               </div>
