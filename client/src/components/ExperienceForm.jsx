@@ -1,4 +1,4 @@
-import { Briefcase, Plus, Sparkle, Sparkles, Trash2 } from "lucide-react";
+import { Briefcase, Plus, Sparkles, Trash2 } from "lucide-react";
 import React from "react";
 
 const ExperienceForm = ({ data, onChange }) => {
