@@ -1,14 +1,14 @@
 import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import Home from "./pages/home";
-import Layout from "./pages/layout";
+import Home from "./pages/Home";
+import Layout from "./pages/Layout";
 import Dashboard from "./pages/Dashboard";
 import ResumeBuilder from "./pages/ResumeBuilder";
 import Preview from "./pages/preview";
-import Login from "./pages/login";
+import Login from "./pages/Login";
 import { useDispatch } from "react-redux";
 import api from "./configs/api";
-import { setLoading } from "./app/features/authSlice";
+import { login, setLoading } from "./app/features/authSlice";
 import { Toaster } from "react-hot-toast";
 
 const App = () => {
