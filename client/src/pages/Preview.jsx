@@ -1,23 +1,42 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { dummyResumeData } from "../assets/assets";
 import ResumePreview from "../components/ResumePreview";
 import Loader from "../components/Loader";
 import { ArrowLeftIcon } from "lucide-react";
+import api from "../configs/api";
 
 const Preview = () => {
   const { resumeId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
   const [resumeData, setResumeData] = useState();
   const loadResume = async () => {
-    setResumeData(
-      dummyResumeData.find((resume) => resume._id === resumeId || null),
-    );
-    setIsLoading(false);
+    try {
+      // First try to fetch as a public resume
+      const { data } = await api.get("/api/resumes/public/" + resumeId);
+      setResumeData(data.resume);
+    } catch (error) {
+      // If public fetch fails, and we have a token, try fetching as owner
+      const token = localStorage.getItem("token");
+      if (token) {
+        try {
+          const { data } = await api.get("/api/resumes/get/" + resumeId, {
+            headers: { Authorization: token },
+          });
+          setResumeData(data.resume);
+        } catch (innerError) {
+          console.log(innerError.message);
+        }
+      } else {
+        console.log(error.message);
+      }
+    } finally {
+      setIsLoading(false);
+    }
   };
+
   useEffect(() => {
     loadResume();
-  }, []);
+  }, [resumeId]);
 
   return resumeData ? (
     <div className="bg-slate-100">
