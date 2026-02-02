@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import {
   FilePenLineIcon,
+  LoaderCircleIcon,
   PencilIcon,
   PlusIcon,
   TrashIcon,
@@ -30,7 +31,16 @@ const Dashboard = () => {
   const navigate = useNavigate();
 
   const loadAllResumes = async () => {
-    setAllResumes(dummyResumeData);
+    try {
+      const { data } = await api.get("/api/users/resumes", {
+        headers: {
+          Authorization: token,
+        },
+      });
+      setAllResumes(data.resumes);
+    } catch (error) {
+      toast.error(error?.response?.data?.message || error.message);
+    }
   };
 
   const createResume = async (event) => {
@@ -75,15 +85,45 @@ const Dashboard = () => {
   };
 
   const editTitle = async (event) => {
-    event.preventDefault(0);
+    try {
+      event.preventDefault();
+      const { data } = await api.put(
+        `/api/resumes/update`,
+        {
+          resumeId: editResumeId,
+          resumeData: { title },
+        },
+        { headers: { Authorization: token } },
+      );
+      setAllResumes(
+        allResumes.map((resume) =>
+          resume._id === editResumeId ? { ...resume, title } : resume,
+        ),
+      );
+      setTitle("");
+      setEditResumeId("");
+      toast.success(data.message);
+    } catch (error) {
+      toast.error(error?.response?.data?.message || error.message);
+    }
   };
 
   const deleteResume = async (resumeId) => {
-    const confirm = window.confirm(
-      "Are you sure you want to delete this resume?",
-    );
-    if (confirm) {
-      setAllResumes((prev) => prev.filter((resume) => resume._id !== resumeId));
+    try {
+      const confirm = window.confirm(
+        "Are you sure you want to delete this resume?",
+      );
+      if (confirm) {
+        const { data } = await api.delete(`/api/resumes/delete/${resumeId}`, {
+          headers: {
+            Authorization: token,
+          },
+        });
+        setAllResumes(allResumes.filter((resume) => resume._id !== resumeId));
+        toast.success(data.message);
+      }
+    } catch (error) {
+      toast.error(error?.response?.data?.message || error.message);
     }
   };
 
@@ -247,6 +287,10 @@ const Dashboard = () => {
                 />
               </div>
               <button className="w-full py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors">
+                {isLoading && (
+                  <LoaderCircleIcon className="animate-spin size-4 text-white" />
+                )}
+                {isLoading ? "Uploading..." : "Upload Resume"}
                 Upload Resume
               </button>
               <XIcon
@@ -263,7 +307,7 @@ const Dashboard = () => {
         {editResumeId && (
           <form
             onSubmit={editTitle}
-            onClick={() => setEditResume("")}
+            onClick={() => setEditResumeId("")}
             className="fixed inset-0 bg-black/70 backdrop-blur bg-opacity-50 z-10 flex items-center justify-center"
           >
             <div
