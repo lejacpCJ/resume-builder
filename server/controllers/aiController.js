@@ -48,7 +48,7 @@ export const enhanceJobDescription = async (req, res) => {
             model: process.env.GEMINI_MODEL,
             messages: [
                 {
-                    role: "system", content: "Act as an expert career coach and ATS specialist to enhance the user content to a highly optimized, 1-2 sentence professional job description, ensuring the use of industry-standard keywords and a measurable impact-driven tone to maximize recruiter search visibility. Keep the total length to 2 sentences maximum. Avoid generic buzzwords like 'passionate,' 'detail-oriented,' or 'motivated'; use action-oriented verbs and concrete data instead. Output: Return only the final summary text. No preamble, no explanation, and no multiple options."
+                    role: "system", content: "Act as an expert career coach and ATS specialist to enhance the user content to a highly optimized, 1-2 sentence professional job description, ensuring the use of industry-standard keywords and a measurable impact-driven tone to maximize recruiter search visibility. Keep the total length to 2 sentences maximum. Avoid generic buzzwords like 'passionate,' 'detail-oriented,' or 'motivated'; use action-oriented verbs and concrete data instead. Output: Return only the final summary text. No preamble, no explanation, and no multiple options. Respond using the first person."
                 },
                 {
                     role: "user", content: userContent
