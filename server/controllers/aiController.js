@@ -81,14 +81,15 @@ export const uploadResume = async (req, res) => {
         const systemPrompt = "You are an expert AI agent to extract data from resume"
         const userPrompt = `extract data from this resume: ${resumeText}
         
-        Provide data in the following JSON format with no additional text before or after:
+        Provide data in the following JSON format with no additional text before or after.
+        IMPORTANT: All dates (start_date, end_date, graduation_date) MUST be in "YYYY-MM" format (e.g., "2023-05"). If the day is missing, default to 01.
+        
         {
             professional_summary: {type: String, default: ''},
             skills: [{type: String}],
             personal_info: {
                 image: {type: String, default: ''},
                 full_name: {type: String, default: ''},
-                profession: {type: String, default: ''},
                 email: {type: String, default: ''},
                 phone: {type: String, default: ''},
                 location: {type: String, default: ''},
@@ -99,8 +100,8 @@ export const uploadResume = async (req, res) => {
                 {
                     company: {type: String},
                     position: {type: String},
-                    start_date: {type: String},
-                    end_date: {type: String},
+                    start_date: "YYYY-MM",
+                    end_date: "YYYY-MM",
                     description: {type: String},
                     is_current: {type: Boolean},
                 }
@@ -114,10 +115,10 @@ export const uploadResume = async (req, res) => {
             ],
             education: [
                 {
-                    insitution: {type: String},
+                    institution: {type: String},
                     degree: {type: String},
                     field: {type: String},
-                    graduation_date: {type: String},
+                    graduation_date: "YYYY-MM",
                     gpa: {type: String},
                 }
             ],
