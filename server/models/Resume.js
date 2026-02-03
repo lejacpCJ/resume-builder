@@ -11,7 +11,6 @@ const ResumeSchema = new mongoose.Schema({
     personal_info: {
         image: {type: String, default: ''},
         full_name: {type: String, default: ''},
-        profession: {type: String, default: ''},
         email: {type: String, default: ''},
         phone: {type: String, default: ''},
         location: {type: String, default: ''},
@@ -37,7 +36,7 @@ const ResumeSchema = new mongoose.Schema({
     ],
     education: [
         {
-            insitution: {type: String},
+            institution: {type: String},
             degree: {type: String},
             field: {type: String},
             graduation_date: {type: String},

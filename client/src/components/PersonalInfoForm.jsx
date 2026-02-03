@@ -47,12 +47,6 @@ const PersonalInfoForm = ({
       type: "text",
     },
     {
-      key: "profession",
-      label: "Profession",
-      icon: BriefcaseBusiness,
-      type: "text",
-    },
-    {
       key: "linkedin",
       label: "LinkedIn Profile",
       icon: Linkedin,
