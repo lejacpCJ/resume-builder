@@ -8,27 +8,13 @@ import api from "../configs/api";
 const Preview = () => {
   const { resumeId } = useParams();
   const [isLoading, setIsLoading] = useState(true);
-  const [resumeData, setResumeData] = useState();
+  const [resumeData, setResumeData] = useState(null);
   const loadResume = async () => {
     try {
-      // First try to fetch as a public resume
       const { data } = await api.get("/api/resumes/public/" + resumeId);
       setResumeData(data.resume);
     } catch (error) {
-      // If public fetch fails, and we have a token, try fetching as owner
-      const token = localStorage.getItem("token");
-      if (token) {
-        try {
-          const { data } = await api.get("/api/resumes/get/" + resumeId, {
-            headers: { Authorization: token },
-          });
-          setResumeData(data.resume);
-        } catch (innerError) {
-          console.log(innerError.message);
-        }
-      } else {
-        console.log(error.message);
-      }
+      console.log(error.message);
     } finally {
       setIsLoading(false);
     }
@@ -36,7 +22,7 @@ const Preview = () => {
 
   useEffect(() => {
     loadResume();
-  }, [resumeId]);
+  }, []);
 
   return resumeData ? (
     <div className="bg-slate-100">
