@@ -167,6 +167,9 @@ const ModernTemplate = ({ data, accentColor }) => {
                       <h3 className="text-lg font-medium text-gray-900">
                         {p.name}
                       </h3>
+                      <p className="text-sm font-medium text-gray-500">
+                        {p.type}
+                      </p>
                     </div>
                   </div>
                   {p.description && (
