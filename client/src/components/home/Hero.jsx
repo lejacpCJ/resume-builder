@@ -121,44 +121,27 @@ const Hero = () => {
           <div className="flex gap-2">
             <Link
               to="/app?state=register"
-              className="hidden md:block px-6 py-2 bg-green-500 hover:bg-green-700 active:scale-95 transition-all rounded-full text-white"
+              className=" md:block px-6 py-2 bg-green-500 hover:bg-green-700 active:scale-95 transition-all rounded-full text-white"
               hidden={user}
             >
               Get started
             </Link>
             <Link
               to="/app?state=login"
-              className="hidden md:block px-6 py-2 border active:scale-95 hover:bg-slate-50 transition-all rounded-full text-slate-700 hover:text-slate-900"
+              className=" md:block px-6 py-2 border active:scale-95 hover:bg-slate-50 transition-all rounded-full text-slate-700 hover:text-slate-900"
               hidden={user}
             >
               Login
             </Link>
             <Link
               to="/app"
-              className="hidden md:block px-8 py-2 bg-green-500 
+              className=" md:block px-8 py-2 bg-green-500 
             hover:bg-green-700 active: scale-95 transition-all rounded-full text-white"
               hidden={!user}
             >
               Dashboard
             </Link>
           </div>
-
-          <button
-            onClick={() => setMenuOpen(true)}
-            className="md:hidden active:scale-90 transition"
-          >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="26"
-              height="26"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              className="lucide lucide-menu"
-            >
-              <path d="M4 5h16M4 12h16M4 19h16" />
-            </svg>
-          </button>
         </nav>
 
         {/* Hero Section */}
